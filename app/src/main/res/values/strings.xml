@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Learning</string>
+    <string name="action_settings">Setting</string>
+    <string name="editText">Enter Whatever Here</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_display_message">The message</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_search">Search</string>
+    <string name="search_string">Placeholder</string>
+    <string name="title_activity_setting">Setting - Test Tab</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preference_file">PrefsFile</string>
+    <string name="action_take_picture">Take picture</string>
+    <string name="title_activity_picture">Send Intent Test</string>
+    <string name="button_take">Ấn để lấy số trong danh bạ</string>
+    <string name="title_activity_display_message_activity2">Fuck</string>
+    <string name="title_activity_share">Share Test</string>
+    <string name="button_send_to">Share That Message</string>
+    <string name="title_activity_test_radio">Test Radio Button</string>
+    <string name="action_radio">Radio Test</string>
+
+</resources>
