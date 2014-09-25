@@ -39,7 +39,7 @@ public class InputActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_search:
-                openShare();
+                openSearch();
                 return true;
             case R.id.action_settings:
                 openSettings();
@@ -49,6 +49,9 @@ public class InputActivity extends Activity {
                 return true;
             case R.id.action_radio_button:
                 openRadioButton();
+                return true;
+            case R.id.action_app_share:
+                openShareTest();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -60,8 +63,8 @@ public class InputActivity extends Activity {
         startActivity(radioIntent);
     }
 
-    public void openShare() {
-        Intent searchIntent = new Intent(this, ShareActivity.class);
+    public void openSearch() {
+        Intent searchIntent = new Intent(this, SearchActivity.class);
         startActivity(searchIntent);
     }
 
@@ -71,9 +74,16 @@ public class InputActivity extends Activity {
     }
 
     public void openTakePicture() {
-        Intent takePictureIntent = new Intent(this, PhoneNumberActivity.class);
+        Intent takePictureIntent = new Intent(this, TakePictureActivity.class);
         startActivity(takePictureIntent);
     }
+
+    public void openShareTest() {
+        Intent shareTestIntent = new Intent(this, PhoneNumberActivity.class);
+        startActivity(shareTestIntent);
+    }
+
+
 
     public void onCheckboxClicked(View view) {
         // Is the view now checked?

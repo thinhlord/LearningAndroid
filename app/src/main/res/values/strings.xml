@@ -24,5 +24,7 @@
     <string name="button_send_to">Share That Message</string>
     <string name="title_activity_test_radio">Test Radio Button</string>
     <string name="action_radio">Radio Test</string>
+    <string name="action_share">Share Test</string>
+    <string name="title_activity_take_picture">Take Picture</string>
 
 </resources>
