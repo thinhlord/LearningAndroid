@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.thinh.learning" >
+    package="com.example.thinh.learning">
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".InputActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +27,7 @@
         <activity
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.MyActivity" />
@@ -31,7 +35,7 @@
         <activity
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.MyActivity" />
@@ -39,7 +43,7 @@
         <activity
             android:name=".PhoneNumberActivity"
             android:label="@string/title_activity_picture"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.InputActivity" />
@@ -47,7 +51,7 @@
         <activity
             android:name=".TestRadioActivity"
             android:label="@string/title_activity_test_radio"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.InputActivity" />
@@ -55,7 +59,7 @@
         <activity
             android:name=".TakePictureActivity"
             android:label="@string/title_activity_take_picture"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.InputActivity" />
@@ -63,7 +67,15 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
-            android:parentActivityName=".InputActivity" >
+            android:parentActivityName=".InputActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.thinh.learning.InputActivity" />
+        </activity>
+        <activity
+            android:name=".DbTestActivity"
+            android:label="@string/title_activity_db_test"
+            android:parentActivityName=".InputActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.thinh.learning.InputActivity" />

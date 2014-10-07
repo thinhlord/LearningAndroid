@@ -26,5 +26,10 @@
     <string name="action_radio">Radio Test</string>
     <string name="action_share">Share Test</string>
     <string name="title_activity_take_picture">Take Picture</string>
+    <string name="button_take_picture">Take Picture</string>
+    <string name="action_db">Database Test</string>
+    <string name="title_activity_db_test">Database Test</string>
+    <string name="button_add">Add Contact</string>
+    <string name="button_drop">Drop Database</string>
 
 </resources>

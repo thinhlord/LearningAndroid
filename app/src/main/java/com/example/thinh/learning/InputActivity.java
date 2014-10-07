@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.thinh.learning.content.HeadlineItems;
+import com.example.thinh.learning.model.HeadlineItems;
 
 // This is the home activity
 public class InputActivity extends Activity {
@@ -53,9 +53,16 @@ public class InputActivity extends Activity {
             case R.id.action_app_share:
                 openShareTest();
                 return true;
+            case R.id.action_test_db:
+                openDbTest();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void openDbTest() {
+        Intent dbIntent = new Intent(this, DbTestActivity.class);
+        startActivity(dbIntent);
     }
 
     public void openRadioButton() {
@@ -84,13 +91,12 @@ public class InputActivity extends Activity {
     }
 
 
-
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.checkBox1:
                 if (checked)
                     HeadlineItems.setSaved(0);

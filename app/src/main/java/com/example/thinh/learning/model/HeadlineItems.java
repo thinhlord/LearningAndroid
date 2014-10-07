@@ -1,4 +1,4 @@
-package com.example.thinh.learning.content;
+package com.example.thinh.learning.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ public class HeadlineItems {
     public static Map<String, HeadlineText> ITEM_MAP = new HashMap<String, HeadlineText>();
 
     public static boolean[] saved = {false, false, false};
+
     static {
         // Add 3 sample items.
         addItem(new HeadlineText("1", "Option 1"));
@@ -22,6 +23,14 @@ public class HeadlineItems {
     private static void addItem(HeadlineText item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
+    }
+
+    public static void setSaved(int option) {
+        saved[option] = true;
+    }
+
+    public static void setNoSaved(int option) {
+        saved[option] = false;
     }
 
     public static class HeadlineText {
@@ -37,13 +46,5 @@ public class HeadlineItems {
         public String toString() {
             return content;
         }
-    }
-
-    public static void setSaved(int option) {
-        saved[option] = true;
-    }
-
-    public static void setNoSaved(int option) {
-        saved[option] = false;
     }
 }
