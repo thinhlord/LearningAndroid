@@ -2,6 +2,9 @@ package com.example.thinh.learning.modelForUetm;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.List;
 
 /**
  * A demonstration of ContactList Model by Thinh
@@ -9,13 +12,17 @@ import android.database.sqlite.SQLiteDatabase;
 public class ContactListModel {
 
 
-    private static AbstractNode root;
+    private static GroupNode root;
     private ContactListDbHelper mDbHelper;
     private SQLiteDatabase db;
 
     public ContactListModel(Context context) {
         mDbHelper = new ContactListDbHelper(context);
+        root = new GroupNode(AbstractNode.ROOT_UID);
+    }
 
+    public ContactListModel() {
+        root = new GroupNode(AbstractNode.ROOT_UID);
     }
 
     public void open() {
@@ -30,7 +37,33 @@ public class ContactListModel {
 
     }
 
-    public AbstractNode getChildNode() {
+    public List<AbstractNode> getChildNode(String uid) {
+        Log.d("CLM", "Get child node of " + uid);
+        AbstractNode parent = search(uid, root);
+        Log.d("CLM", "Search result: " + parent);
+        if (parent.isPersonNode()) return null;
+        else {
+            return ((GroupNode) parent).getChildNode();
+        }
+    }
+
+    public boolean isLeafNode(String uid) {
+        AbstractNode result = search(uid, root);
+        return result.isPersonNode();
+    }
+
+    private AbstractNode search(String uid, AbstractNode current) {
+        Log.d("CLM", uid + " " + current.getUid());
+        if (current.getUid().equals(uid)) return current;
+        else if (current.isPersonNode()) return null;
+        else {
+            AbstractNode result = null;
+            List<AbstractNode> children = ((GroupNode) current).getChildNode();
+            for (AbstractNode i : children) {
+                result = search(uid, i);
+                if (result != null) return result;
+            }
+        }
         return null;
     }
 
@@ -42,8 +75,9 @@ public class ContactListModel {
 
     }
 
-    public void getParent() {
-
+    public AbstractNode getParent(String uid) {
+        AbstractNode result = search(uid, root);
+        return search(result.getParentUid(), root);
     }
 
     /*

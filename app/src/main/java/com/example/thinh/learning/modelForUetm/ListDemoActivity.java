@@ -1,4 +1,4 @@
-package com.example.thinh.learning;
+package com.example.thinh.learning.modelForUetm;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -6,9 +6,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.thinh.learning.R;
 
-public class SearchActivity extends FragmentActivity
-        implements HeadlineFragment.OnFragmentInteractionListener {
+
+public class ListDemoActivity extends FragmentActivity
+        implements ContactListFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class SearchActivity extends FragmentActivity
             }
 
             // Create a new Fragment to be placed in the activity layout
-            HeadlineFragment firstFragment = new HeadlineFragment();
+            ContactListFragment firstFragment = new ContactListFragment();
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
@@ -59,10 +61,10 @@ public class SearchActivity extends FragmentActivity
     }
 
     @Override
-    public void onFragmentInteraction(int pos) {
-        DataFragment newFragment = new DataFragment();
+    public void onFragmentInteraction(String uid) {
+        ContactListFragment newFragment = new ContactListFragment();
         Bundle args = new Bundle();
-        args.putInt(DataFragment.ARG_POS, pos);
+        args.putString(ContactListFragment.ARG_UID, uid);
         newFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

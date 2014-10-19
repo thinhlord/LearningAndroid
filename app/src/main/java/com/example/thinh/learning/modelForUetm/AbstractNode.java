@@ -4,23 +4,26 @@ package com.example.thinh.learning.modelForUetm;
  * Created by Nguyen Duc Thinh on 04/10/2014.
  * Project type: Android
  */
+
 public abstract class AbstractNode {
 
     public static final String ROOT_UID = "0";
-
-    private int id;
+    protected ContactServer data = new ContactServer();
     private String uid;
     private String name;
     private int level;
     private String parentUid;
+
 
     public AbstractNode() {
     }
 
     // Create a contact node using its uid only, the rests will be got from server
     public AbstractNode(String _uid) {
-        uid = _uid;
-        //TODO: fetch name, level and childrenUID from server, then convert uid --> child
+        setUid(_uid);
+        setName(data.requestName(_uid));
+        setLevel(data.requestLv(_uid));
+        setParentUid(data.requestParent(_uid));
     }
 
     public String getParentUid() {
@@ -29,14 +32,6 @@ public abstract class AbstractNode {
 
     public void setParentUid(String parentUid) {
         this.parentUid = parentUid;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUid() {
@@ -64,5 +59,9 @@ public abstract class AbstractNode {
     }
 
     public abstract boolean isPersonNode();
+
+    public String toString() {
+        return getName();
+    }
 
 }

@@ -8,6 +8,11 @@ public class PersonNode extends AbstractNode {
 
     private String personalData;
 
+    PersonNode(String _uid) {
+        super(_uid);
+        setPersonalData(data.requestPersonData(_uid));
+    }
+
     public String getPersonalData() {
         return personalData;
     }

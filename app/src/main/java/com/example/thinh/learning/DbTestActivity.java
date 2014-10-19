@@ -1,22 +1,10 @@
 package com.example.thinh.learning;
 
 import android.app.ListActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-
-import com.example.thinh.learning.modelForUetm.ContactListModel;
-
-import java.util.List;
 
 
 public class DbTestActivity extends ListActivity {
-
+        /*
     ContactListModel database;
 
     @Override
@@ -91,5 +79,5 @@ public class DbTestActivity extends ListActivity {
     public void dropDb(View view) {
         database.dropDb();
 
-    }
+    }*/
 }

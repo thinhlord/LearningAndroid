@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.thinh.learning.model.HeadlineItems;
+import com.example.thinh.learning.modelForUetm.ListDemoActivity;
 
 // This is the home activity
 public class InputActivity extends Activity {
@@ -61,7 +62,7 @@ public class InputActivity extends Activity {
     }
 
     public void openDbTest() {
-        Intent dbIntent = new Intent(this, DbTestActivity.class);
+        Intent dbIntent = new Intent(this, ListDemoActivity.class);
         startActivity(dbIntent);
     }
 

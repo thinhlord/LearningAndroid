@@ -11,12 +11,28 @@ public class GroupNode extends AbstractNode {
 
     private List<AbstractNode> childNode = new ArrayList<AbstractNode>();
 
+    GroupNode(String _uid) {
+        super(_uid);
+        String[] childUid = data.requestChildUid(_uid);
+        for (int i = 0; i < childUid.length; i++) {
+            if (data.requestIsLeafNode(childUid[i])) {
+                addChildNode(new GroupNode(childUid[i]));
+            } else {
+                addChildNode(new PersonNode(childUid[i]));
+            }
+        }
+    }
+
     public List<AbstractNode> getChildNode() {
         return childNode;
     }
 
     public void setChildNode(List<AbstractNode> childNode) {
         this.childNode = childNode;
+    }
+
+    public void addChildNode(AbstractNode child) {
+        childNode.add(child);
     }
 
     public boolean isPersonNode() {
