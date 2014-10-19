@@ -10,21 +10,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.thinh.learning.model.UETM_ContactList_Model;
+import com.example.thinh.learning.modelForUetm.ContactListModel;
 
 import java.util.List;
 
 
 public class DbTestActivity extends ListActivity {
 
-    UETM_ContactList_Model database;
+    ContactListModel database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_db_test);
 
-        database = new UETM_ContactList_Model(this);
+        database = new ContactListModel(this);
         database.open();
         final List<String> contactListName = database.getContactListName();
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
