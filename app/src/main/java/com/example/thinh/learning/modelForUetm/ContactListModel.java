@@ -38,12 +38,10 @@ public class ContactListModel {
     }
 
     public List<AbstractNode> getChildNode(String uid) {
-        Log.d("CLM", "Get child node of " + uid);
         AbstractNode parent = search(uid, root);
-        Log.d("CLM", "Search result: " + parent);
         if (parent.isPersonNode()) return null;
         else {
-            return ((GroupNode) parent).getChildNode();
+            return ((GroupNode) parent).getChildNodeList();
         }
     }
 
@@ -58,7 +56,7 @@ public class ContactListModel {
         else if (current.isPersonNode()) return null;
         else {
             AbstractNode result = null;
-            List<AbstractNode> children = ((GroupNode) current).getChildNode();
+            List<AbstractNode> children = ((GroupNode) current).getChildNodeList();
             for (AbstractNode i : children) {
                 result = search(uid, i);
                 if (result != null) return result;

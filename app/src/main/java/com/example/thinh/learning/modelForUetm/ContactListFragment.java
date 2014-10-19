@@ -3,6 +3,7 @@ package com.example.thinh.learning.modelForUetm;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,8 +27,10 @@ public class ContactListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             currentUid = getArguments().getString(ARG_UID);
+            Log.d("CLF", "Current: " + currentUid);
         }
         childList = model.getChildNode(currentUid);
+        Log.d("CLF", childList.toString());
         if (childList != null) setListAdapter(new ArrayAdapter<AbstractNode>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, childList));
     }
