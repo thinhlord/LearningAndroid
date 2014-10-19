@@ -14,11 +14,11 @@ public class GroupNode extends AbstractNode {
     GroupNode(String _uid) {
         super(_uid);
         String[] childUid = data.requestChildUid(_uid);
-        for (int i = 0; i < childUid.length; i++) {
-            if (data.requestIsLeafNode(childUid[i])) {
-                addChildNode(new PersonNode(childUid[i]));
+        for (String i : childUid) {
+            if (data.requestIsLeafNode(i)) {
+                addChildNode(new PersonNode(i));
             } else {
-                addChildNode(new GroupNode(childUid[i]));
+                addChildNode(new GroupNode(i));
             }
         }
     }
@@ -38,4 +38,5 @@ public class GroupNode extends AbstractNode {
     public boolean isPersonNode() {
         return false;
     }
+
 }

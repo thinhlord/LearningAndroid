@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ContactServer {
 
     public boolean[] isLeaf = {false, false, false, true, true, true, true};
-    public String[] uidDemo = {"0", "1", "2", "3", "4", "5", "6"};
+    //public String[] uidDemo = {"0", "1", "2", "3", "4", "5", "6"};
     public String[] nameDemo = {"root", "cntt", "dtvt", "k56", "k57", "k56", "k57"};
     public int[] lvDemo = {0, 1, 1, 2, 2, 2, 2};
     public String[] parentUidDemo = {"", "0", "0", "1", "1", "2", "2"};
@@ -42,7 +42,7 @@ public class ContactServer {
     }
 
     public String requestPersonData(String uid) {
-        return "Nothing";
+        return "Đây là Người nhé" + uid;
     }
 
     public boolean requestIsLeafNode(String uid) {

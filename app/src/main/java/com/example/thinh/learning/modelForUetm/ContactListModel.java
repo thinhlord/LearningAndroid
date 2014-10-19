@@ -2,7 +2,6 @@ package com.example.thinh.learning.modelForUetm;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.List;
 
@@ -38,27 +37,29 @@ public class ContactListModel {
     }
 
     public List<AbstractNode> getChildNode(String uid) {
-        AbstractNode parent = search(uid, root);
+        AbstractNode parent = getNode(uid);
         if (parent.isPersonNode()) return null;
         else {
             return ((GroupNode) parent).getChildNodeList();
         }
     }
 
+    public AbstractNode getNode(String uid) {
+        return search(uid, root);
+    }
+
     public boolean isLeafNode(String uid) {
-        AbstractNode result = search(uid, root);
+        AbstractNode result = getNode(uid);
         return result.isPersonNode();
     }
 
     private AbstractNode search(String uid, AbstractNode current) {
-        Log.d("CLM", uid + " " + current.getUid());
         if (current.getUid().equals(uid)) return current;
         else if (current.isPersonNode()) return null;
         else {
-            AbstractNode result = null;
             List<AbstractNode> children = ((GroupNode) current).getChildNodeList();
             for (AbstractNode i : children) {
-                result = search(uid, i);
+                AbstractNode result = search(uid, i);
                 if (result != null) return result;
             }
         }

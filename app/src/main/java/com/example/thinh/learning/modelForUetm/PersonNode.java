@@ -24,4 +24,6 @@ public class PersonNode extends AbstractNode {
     public boolean isPersonNode() {
         return true;
     }
+
+    //public String toString() { return getPersonalData(); }
 }
