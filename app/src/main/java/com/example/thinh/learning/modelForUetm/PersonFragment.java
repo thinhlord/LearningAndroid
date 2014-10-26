@@ -46,11 +46,11 @@ public class PersonFragment extends Fragment {
         }
     }
 
-    public void updateDataView(String uid) {
+    public void updateDataView(String id) {
         TextView data = (TextView) getActivity().findViewById(R.id.article);
         data.setTextSize(20);
-        PersonNode currentNode = (PersonNode) model.getNode(uid);
-        data.setText(currentNode.getPersonalData());
-        currentUid = uid;
+        PersonNode currentNode = (PersonNode) model.getNode(id);
+        data.setText(currentNode.getName() + "\n" + currentNode.getStudentId());
+        currentUid = id;
     }
 }

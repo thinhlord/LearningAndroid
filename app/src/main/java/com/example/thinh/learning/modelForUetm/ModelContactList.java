@@ -1,9 +1,21 @@
 package com.example.thinh.learning.modelForUetm;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.os.Environment;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +36,9 @@ public class ModelContactList {
     private static final String PERSON_CONTACT = "contact";
     private static final String PERSON_AC = "achievement";
     private static final String PERSON_STRONG = "strong_point";
+    private static final String DATA_URL = "";
+    private static final String FILE_PATH = "demo.json";
+
 
     //private Node root;
 
@@ -39,7 +54,7 @@ public class ModelContactList {
     public List<PersonNode> getChildPersonNode(String id) {
         List<Node> childList = this.getChildNode(id);
         List<PersonNode> result = new ArrayList<PersonNode>();
-        for (Node i : result) {
+        for (Node i : childList) {
             if (i.isPersonNode()) result.add((PersonNode) i);
         }
         return result;
@@ -48,22 +63,30 @@ public class ModelContactList {
     public List<GroupNode> getChildGroupNode(String id) {
         List<Node> childList = this.getChildNode(id);
         List<GroupNode> result = new ArrayList<GroupNode>();
-        for (Node i : result) {
+        for (Node i : childList) {
             if (!i.isPersonNode()) result.add((GroupNode) i);
         }
         return result;
     }
 
+    public Node getNode(String id) {
+        int i = id.length();
+        while (id.charAt(i) != '|') i--;
+        String parentId = id.substring(0, i - 1);
+        int childPosition = Integer.parseInt(id.substring(i + 1));
+        return getChildNode(parentId).get(childPosition);
+    }
+
     public List<Node> getChildNode(String id) {
         List<Node> result = new ArrayList<Node>();
-        JSONArray childArray = serverContactListRequest(id);
-        for (int i = 0; i < childArray.length(); i++) {
-            try {
+        try {
+            JSONArray childArray = serverContactListRequest(id);
+            for (int i = 0; i < childArray.length(); i++) {
                 JSONObject childObj = childArray.getJSONObject(i);
                 Node child;
                 String name = childObj.getString(NAME_PARAMS);
                 if (childObj.getString(TYPE_PARAMS).equals(TYPE_GROUP_NODE)) {
-                    child = new GroupNode(id, name, null);
+                    child = new GroupNode(id + "|" + i, name, null);
                 } else {
                     //if (childObj.getString(TYPE_PARAMS).equals(TYPE_PERSON_NODE))
                     String studentId = childObj.getString(PERSON_STD_ID);
@@ -78,15 +101,41 @@ public class ModelContactList {
                             acadYear, acadYearClass, contact, ac, strongP);
                 }
                 result.add(child);
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return result;
     }
 
-    private JSONArray serverContactListRequest(String id) {
-        return null;
+    private JSONArray serverContactListRequest(String id) throws Exception {
+
+        // Server http request begin
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(DATA_URL);
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("id", id));
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+        HttpResponse response = client.execute(post);
+
+        //BufferedReader in = new BufferedReader(
+        //        new InputStreamReader(response.getEntity().getContent()));
+        // Server http request end
+
+        // Demo using file
+        // Currently use demo.json on sd card for testing
+        File sdcard = Environment.getExternalStorageDirectory();
+        File file = new File(sdcard, FILE_PATH);
+        BufferedReader in = new BufferedReader(new FileReader(FILE_PATH));
+        //File demo end
+        String inputLine;
+        StringBuilder rp = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            rp.append(inputLine);
+        }
+        in.close();
+        JSONTokener token = new JSONTokener(rp.toString());
+        return new JSONArray(token);
     }
 
 
