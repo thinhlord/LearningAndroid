@@ -7,36 +7,49 @@ import java.util.List;
  * Created by Nguyen Duc Thinh on 18/10/2014.
  * Project type: Android
  */
-public class GroupNode extends AbstractNode {
+public class GroupNode extends Node {
 
-    private List<AbstractNode> childNode = new ArrayList<AbstractNode>();
+    private List<Node> childNode = new ArrayList<Node>();
 
-    GroupNode(String _uid) {
-        super(_uid);
-        String[] childUid = data.requestChildUid(_uid);
-        for (String i : childUid) {
-            if (data.requestIsLeafNode(i)) {
-                addChildNode(new PersonNode(i));
-            } else {
-                addChildNode(new GroupNode(i));
-            }
-        }
+    public GroupNode() {
+        super();
     }
 
-    public List<AbstractNode> getChildNodeList() {
+    public GroupNode(String id, String name, List<Node> childNode) {
+        super(id, name);
+        this.setChildNode(childNode);
+    }
+
+    public List<Node> getChildNodeList() {
         return childNode;
     }
 
-    public void setChildNode(List<AbstractNode> childNode) {
+    public void setChildNode(List<Node> childNode) {
         this.childNode = childNode;
     }
 
-    public void addChildNode(AbstractNode child) {
+    public void addChildNode(Node child) {
         childNode.add(child);
     }
 
     public boolean isPersonNode() {
         return false;
+    }
+
+    public List<GroupNode> getGroupChildNode() {
+        List<GroupNode> result = new ArrayList<GroupNode>();
+        for (Node i : childNode) {
+            if (!i.isPersonNode()) result.add((GroupNode) i);
+        }
+        return result;
+    }
+
+    public List<PersonNode> getGroupPersonNode() {
+        List<PersonNode> result = new ArrayList<PersonNode>();
+        for (Node i : childNode) {
+            if (i.isPersonNode()) result.add((PersonNode) i);
+        }
+        return result;
     }
 
 }

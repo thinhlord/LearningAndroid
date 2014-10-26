@@ -42,7 +42,8 @@ public class ContactServer {
     }
 
     public String requestPersonData(String uid) {
-        return "Đây là Người nhé" + uid;
+        int i = Integer.parseInt(uid);
+        return "Đây là lớp " + nameDemo[i];
     }
 
     public boolean requestIsLeafNode(String uid) {

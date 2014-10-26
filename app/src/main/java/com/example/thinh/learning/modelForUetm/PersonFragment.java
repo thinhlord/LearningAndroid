@@ -1,7 +1,5 @@
 package com.example.thinh.learning.modelForUetm;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,9 +12,9 @@ import com.example.thinh.learning.R;
 
 public class PersonFragment extends Fragment {
 
-    static final String ARG_POS = "position";
-
-    int currentPosition = -1;
+    static final String ARG_ID = "id";
+    private static final ModelContactList model = new ModelContactList();
+    private String currentUid = "0";
 
     public PersonFragment() {
     }
@@ -25,7 +23,7 @@ public class PersonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            currentPosition = getArguments().getInt(ARG_POS);
+            currentUid = getArguments().getString(ARG_ID);
         }
     }
 
@@ -42,18 +40,17 @@ public class PersonFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            updateDataView(args.getInt(ARG_POS));
-        } else if (currentPosition != -1) {
-            updateDataView(currentPosition);
+            updateDataView(args.getString(ARG_ID));
+        } else if (!currentUid.equals("0")) {
+            updateDataView(currentUid);
         }
     }
 
-    public void updateDataView(int pos) {
+    public void updateDataView(String uid) {
         TextView data = (TextView) getActivity().findViewById(R.id.article);
-        data.setTextSize(40);
-        SharedPreferences contentFile = getActivity().
-                getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
-        data.setText(contentFile.getString("Option" + pos, "Đéo có gì :))"));
-        currentPosition = pos;
+        data.setTextSize(20);
+        PersonNode currentNode = (PersonNode) model.getNode(uid);
+        data.setText(currentNode.getPersonalData());
+        currentUid = uid;
     }
 }

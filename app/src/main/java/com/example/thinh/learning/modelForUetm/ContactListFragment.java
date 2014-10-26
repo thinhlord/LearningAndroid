@@ -13,9 +13,9 @@ import java.util.List;
 public class ContactListFragment extends ListFragment {
 
     static final String ARG_UID = "uid";
-    private static final ContactListModel model = new ContactListModel();
+    private static final ModelContactList model = new ModelContactList();
     private String currentUid = "0";
-    private List<AbstractNode> childList = new ArrayList<AbstractNode>();
+    private List<Node> childList = new ArrayList<Node>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -30,7 +30,7 @@ public class ContactListFragment extends ListFragment {
         }
         if (!model.isLeafNode(currentUid)) {
             childList = model.getChildNode(currentUid);
-            setListAdapter(new ArrayAdapter<AbstractNode>(getActivity(),
+            setListAdapter(new ArrayAdapter<Node>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1, childList));
         } else {
             List<String> leafData = new ArrayList<String>();
@@ -62,15 +62,16 @@ public class ContactListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        if (model.isLeafNode(currentUid)) return;
         super.onListItemClick(l, v, position, id);
         if (null != mListener) {
-            mListener.onFragmentInteraction(childList.get(position).getUid());
+            String clickedChildUid = childList.get(position).getId();
+            mListener.onFragmentInteraction(clickedChildUid,
+                    model.isLeafNode(clickedChildUid));
         }
     }
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(String uid);
+        public void onFragmentInteraction(String uid, boolean isLeaf);
     }
 
 }

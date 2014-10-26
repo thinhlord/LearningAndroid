@@ -1,6 +1,7 @@
 package com.example.thinh.learning.modelForUetm;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
@@ -61,10 +62,15 @@ public class ListDemoActivity extends FragmentActivity
     }
 
     @Override
-    public void onFragmentInteraction(String uid) {
-        ContactListFragment newFragment = new ContactListFragment();
+    public void onFragmentInteraction(String id, boolean isLeaf) {
+        Fragment newFragment;
+        if (!isLeaf) {
+            newFragment = new ContactListFragment();
+        } else {
+            newFragment = new PersonFragment();
+        }
         Bundle args = new Bundle();
-        args.putString(ContactListFragment.ARG_UID, uid);
+        args.putString(ContactListFragment.ARG_UID, id);
         newFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
