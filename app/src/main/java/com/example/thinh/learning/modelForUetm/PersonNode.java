@@ -8,7 +8,7 @@ public class PersonNode extends Node {
 
     private String studentId;
     private String dob;
-    private boolean gender;
+    private boolean genderMale;
     private String academicYear;
     private String academicYearClass;
     private String contact;
@@ -19,12 +19,12 @@ public class PersonNode extends Node {
     }
 
     public PersonNode(String id, String studentId, String name, String dob,
-                      boolean gender, String academicYear, String academicYearClass,
+                      boolean genderMale, String academicYear, String academicYearClass,
                       String contact, String achievement, String strongPoint) {
         super(id, name);
         setStudentId(studentId);
         setDob(dob);
-        setGender(gender);
+        setGenderMale(genderMale);
         setAcademicYear(academicYear);
         setAcademicYear(academicYearClass);
         setContact(contact);
@@ -49,12 +49,12 @@ public class PersonNode extends Node {
         this.dob = dob;
     }
 
-    public boolean isGender() {
-        return gender;
+    public boolean isGenderMale() {
+        return genderMale;
     }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
+    public void setGenderMale(boolean genderMale) {
+        this.genderMale = genderMale;
     }
 
     public String getAcademicYear() {

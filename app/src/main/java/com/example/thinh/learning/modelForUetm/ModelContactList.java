@@ -2,13 +2,6 @@ package com.example.thinh.learning.modelForUetm;
 
 import android.os.Environment;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -47,9 +40,10 @@ public class ModelContactList {
         //root = new GroupNode();
     }
 
+    /*useless
     public List<Node> getChildNodeOfRoot() {
         return getChildNode("R");
-    }
+    }*/
 
     public List<PersonNode> getChildPersonNode(String id) {
         List<Node> childList = this.getChildNode(id);
@@ -70,8 +64,8 @@ public class ModelContactList {
     }
 
     public Node getNode(String id) {
-        int i = id.length();
-        while (id.charAt(i) != '|') i--;
+        int i = id.length() - 1;
+        while ((id.charAt(i) != '|') && i >= 0) i--;
         String parentId = id.substring(0, i - 1);
         int childPosition = Integer.parseInt(id.substring(i + 1));
         return getChildNode(parentId).get(childPosition);
@@ -97,7 +91,7 @@ public class ModelContactList {
                     String contact = childObj.getString(PERSON_CONTACT);
                     String ac = childObj.getString(PERSON_AC);
                     String strongP = childObj.getString(PERSON_STRONG);
-                    child = new PersonNode(id, studentId, name, dob, gender,
+                    child = new PersonNode(id + "|" + i, studentId, name, dob, gender,
                             acadYear, acadYearClass, contact, ac, strongP);
                 }
                 result.add(child);
@@ -110,7 +104,7 @@ public class ModelContactList {
 
     private JSONArray serverContactListRequest(String id) throws Exception {
 
-        // Server http request begin
+        /* Server http request begin
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(DATA_URL);
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -120,13 +114,13 @@ public class ModelContactList {
 
         //BufferedReader in = new BufferedReader(
         //        new InputStreamReader(response.getEntity().getContent()));
-        // Server http request end
+        // Server http request end */
 
         // Demo using file
         // Currently use demo.json on sd card for testing
         File sdcard = Environment.getExternalStorageDirectory();
         File file = new File(sdcard, FILE_PATH);
-        BufferedReader in = new BufferedReader(new FileReader(FILE_PATH));
+        BufferedReader in = new BufferedReader(new FileReader(file));
         //File demo end
         String inputLine;
         StringBuilder rp = new StringBuilder();

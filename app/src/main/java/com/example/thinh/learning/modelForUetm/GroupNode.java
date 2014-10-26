@@ -12,7 +12,6 @@ public class GroupNode extends Node {
     private List<Node> childNode = new ArrayList<Node>();
 
     public GroupNode() {
-        super();
     }
 
     public GroupNode(String id, String name, List<Node> childNode) {

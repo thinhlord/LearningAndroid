@@ -14,7 +14,7 @@ public class PersonFragment extends Fragment {
 
     static final String ARG_ID = "id";
     private static final ModelContactList model = new ModelContactList();
-    private String currentUid = "0";
+    private String currentId = "R";
 
     public PersonFragment() {
     }
@@ -23,7 +23,7 @@ public class PersonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            currentUid = getArguments().getString(ARG_ID);
+            currentId = getArguments().getString(ARG_ID);
         }
     }
 
@@ -41,8 +41,8 @@ public class PersonFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             updateDataView(args.getString(ARG_ID));
-        } else if (!currentUid.equals("0")) {
-            updateDataView(currentUid);
+        } else if (!currentId.equals("0")) {
+            updateDataView(currentId);
         }
     }
 
@@ -50,7 +50,7 @@ public class PersonFragment extends Fragment {
         TextView data = (TextView) getActivity().findViewById(R.id.article);
         data.setTextSize(20);
         PersonNode currentNode = (PersonNode) model.getNode(id);
-        data.setText(currentNode.getName() + "\n" + currentNode.getStudentId());
-        currentUid = id;
+        data.setText(currentNode.getName() + "\n" + currentNode.getId());
+        currentId = id;
     }
 }

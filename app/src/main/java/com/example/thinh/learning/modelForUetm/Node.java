@@ -19,11 +19,6 @@ public abstract class Node {
         setName(name);
     }
 
-    public Node(String id) {
-        setId(id);
-
-    }
-
     public String getId() {
         return id;
     }
@@ -43,7 +38,7 @@ public abstract class Node {
     public abstract boolean isPersonNode();
 
     public String toString() {
-        return getName();
+        return getId();
     }
 
 }

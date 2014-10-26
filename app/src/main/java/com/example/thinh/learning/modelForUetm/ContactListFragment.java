@@ -14,7 +14,7 @@ public class ContactListFragment extends ListFragment {
 
     static final String ARG_ID = "id";
     private static final ModelContactList model = new ModelContactList();
-    private String currentNodeId = "0";
+    private String currentNodeId = "R";
     private List<Node> childList = new ArrayList<Node>();
 
     private OnFragmentInteractionListener mListener;
