@@ -1,23 +1,22 @@
-﻿{
-  "node": [
+﻿ [
     {
       "name": "group1",
-      "type": "group",
-      "": {}
+      "type": "group"
     },
     {
       "name": "group2",
       "type": "group"
     },
     {
+	  "type": "person",
       "name": "person",
       "student_id": "1202",
       "dob": "x/y/z",
-      "gender": "dual",
+      "gender": "true",
       "academic_year": "2014",
       "class": "k57ca",
-      "contact": "eo biet",
-      "achievement": "eo co"
+      "contact": "ko biet",
+      "achievement": "ko co",
+	  "strong_point" : "ko co not"
     }
   ]
-}
